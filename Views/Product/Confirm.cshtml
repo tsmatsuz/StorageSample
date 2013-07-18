@@ -1,0 +1,48 @@
+﻿@model WordSampleWebRole.Models.ProductItemModel
+
+@{
+    ViewBag.Title = "Confirm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ja-JP");
+}
+
+<h2>購入商品の確認</h2>
+
+@using (Html.BeginForm("UpdateCount", "Product"))
+{
+    @Html.HiddenFor(m => m.ProductId)
+    @Html.HiddenFor(m => m.ProductName)
+    @Html.HiddenFor(m => m.ProductUnitPrice)
+
+    <table style="width: 100%;">
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.ProductName)
+            </th>
+            <td>
+                @Html.DisplayFor(m => m.ProductName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.ProductUnitPrice)
+            </th>
+            <td>
+                @Html.DisplayFor(m => m.ProductUnitPrice, "Currency")
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.ProductCount)
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.ProductCount)
+                @Html.ValidationMessageFor(m => m.ProductCount)
+            </td>
+        </tr>
+    </table>
+
+    <p>
+    <input type="submit" value="更新" />
+    </p>
+}

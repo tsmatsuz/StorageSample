@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Web.Helpers</name>
+  </assembly>
+  <members>
+    <member name="T:System.Web.Helpers.Chart">
+      <summary>データをグラフ イメージとして表示します。</summary>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.#ctor(System.Int32,System.Int32,System.String,System.String)">
+      <summary>
+        <see cref="T:System.Web.Helpers.Chart" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="width">グラフ イメージ全体の幅 (ピクセル単位)。</param>
+      <param name="height">グラフ イメージ全体の高さ (ピクセル単位)。</param>
+      <param name="theme">グラフに適用するテンプレート。</param>
+      <param name="themePath">グラフに適用するテンプレートのパスおよびファイル名。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.AddLegend(System.String,System.String)">
+      <summary>グラフ イメージの凡例を表します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="title">凡例のタイトルのテキスト。</param>
+      <param name="name">凡例の名前。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.AddSeries(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Collections.IEnumerable,System.String,System.Collections.IEnumerable,System.String)">
+      <summary>グラフのデータ ポイントおよび系列の属性を提供します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="name">系列の一意の名前。</param>
+      <param name="chartType">系列のグラフの種類。</param>
+      <param name="chartArea">データ系列をプロットするために使用されるグラフ エリアの名前。</param>
+      <param name="axisLabel">系列の軸ラベルのテキスト。</param>
+      <param name="legend">凡例に関連付けられた系列の名前。</param>
+      <param name="markerStep">データ ポイントのマーカーを表示する頻度を決定する値。</param>
+      <param name="xValue">X 軸に沿ってプロットされる値。</param>
+      <param name="xField">X 値のフィールドの名前。</param>
+      <param name="yValues">Y 軸に沿ってプロットされる値。</param>
+      <param name="yFields">Y 値のフィールドの名前のコンマ区切りリスト。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.AddTitle(System.String,System.String)">
+      <summary>グラフ イメージ全体のタイトルを表します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="text">指定されたタイトル テキスト。</param>
+      <param name="name">タイトルの一意の名前。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.DataBindCrossTable(System.Collections.IEnumerable,System.String,System.String,System.String,System.String,System.String)">
+      <summary>列内の一意の値ごとに系列を 1 つ作成して、グラフをデータ テーブルにデータバインドします。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="dataSource">グラフのデータ ソース。</param>
+      <param name="groupByField">データを系列にグループ化するために使用する列の名前。</param>
+      <param name="xField">X データ ポイントの列の名前。</param>
+      <param name="yFields">Y 値の列の名前のコンマ区切りリスト。</param>
+      <param name="otherFields">バインドできる他のデータ ポイント プロパティ。</param>
+      <param name="pointSortOrder">系列を並べ替えるための指定された順序。 既定値は "Ascending" です。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.DataBindTable(System.Collections.IEnumerable,System.String)">
+      <summary>系列データを作成し、指定されたデータ テーブルにバインドします。オプションで複数の Y 値を設定します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="dataSource">グラフのデータ ソース。</param>
+      <param name="xField">系列の X 値に使用するテーブル列の名前。</param>
+    </member>
+    <member name="P:System.Web.Helpers.Chart.FileName">
+      <summary>グラフ イメージが含まれるファイルの名前を取得または設定します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.GetBytes(System.String)">
+      <summary>グラフ イメージをバイト配列として返します。</summary>
+      <returns>
+        <see cref="T:System.Byte" /> を返します。</returns>
+      <param name="format">イメージの形式。 既定値は "jpeg" です。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.GetFromCache(System.String)">
+      <summary>指定したグラフをキャッシュから取得します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="key">グラフを含むキャッシュ項目のキー。</param>
+    </member>
+    <member name="P:System.Web.Helpers.Chart.Height">
+      <summary>グラフ イメージの高さを取得または設定します。</summary>
+      <returns>
+        <see cref="T:System.Int32" /> を返します。</returns>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.Save(System.String,System.String)">
+      <summary>グラフ イメージを指定されたパスおよびファイル名で保存します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="path">イメージ ファイルの場所および名前。</param>
+      <param name="format">イメージ ファイルの形式。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.SaveToCache(System.String,System.Int32,System.Boolean)">
+      <summary>グラフ イメージをキャッシュに保存します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+      <param name="key">キャッシュ内のグラフを参照するための値。</param>
+      <param name="minutesToCache">キャッシュされたグラフを保持する分数。</param>
+      <param name="slidingExpiration">キャッシュされたグラフがアクセスされた後、引き続きメモリ内に追加時間 (<see cref="minutesToCache" />) 保存するかどうかを指定する値。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.SaveXml(System.String)">
+      <summary>グラフを XML ファイルとして保存します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="path">XML ファイルを保存するためのパスおよびファイル名。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.SetXAxis(System.String,System.Double,System.Double)">
+      <summary>水平軸の値を設定します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="title">水平軸のタイトル。</param>
+      <param name="min">水平軸の最小値。</param>
+      <param name="max">水平軸の最大値。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.SetYAxis(System.String,System.Double,System.Double)">
+      <summary>垂直軸の値を設定します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="title">垂直軸のタイトル。</param>
+      <param name="min">垂直軸の最小値。</param>
+      <param name="max">垂直軸の最小値。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.ToWebImage(System.String)">
+      <summary>現在の <see cref="T:System.Web.Helpers.Chart" /> オブジェクトを基に、<see cref="T:System.Web.Helpers.WebImage" /> オブジェクトを作成します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.WebImage" /> を返します。</returns>
+      <param name="format">
+        <see cref="T:System.Web.Helpers.WebImage" /> クラスに含まれるイメージの形式。 既定値は "jpeg" です。</param>
+    </member>
+    <member name="P:System.Web.Helpers.Chart.Width">
+      <summary>グラフ イメージの幅を取得または設定します。</summary>
+      <returns>
+        <see cref="T:System.Int32" /> を返します。</returns>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.Write(System.String)">
+      <summary>
+        <see cref="T:System.Web.Helpers.Chart" /> オブジェクトの出力をイメージとして表示します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="format">イメージの形式。 既定値は "jpeg" です。</param>
+    </member>
+    <member name="M:System.Web.Helpers.Chart.WriteFromCache(System.String,System.String)">
+      <summary>イメージとしてキャッシュに保存されている <see cref="T:System.Web.Helpers.Chart" /> オブジェクトの出力を表示します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.Chart" /> を返します。</returns>
+      <param name="key">キャッシュからグラフを取得するための値。</param>
+      <param name="format">イメージの形式。 既定値は "jpeg" です。</param>
+    </member>
+    <member name="T:System.Web.Helpers.ChartTheme"></member>
+    <member name="F:System.Web.Helpers.ChartTheme.Blue"></member>
+    <member name="F:System.Web.Helpers.ChartTheme.Green"></member>
+    <member name="F:System.Web.Helpers.ChartTheme.Vanilla"></member>
+    <member name="F:System.Web.Helpers.ChartTheme.Vanilla3D"></member>
+    <member name="F:System.Web.Helpers.ChartTheme.Yellow"></member>
+    <member name="T:System.Web.Helpers.Crypto"></member>
+    <member name="M:System.Web.Helpers.Crypto.GenerateSalt(System.Int32)"></member>
+    <member name="M:System.Web.Helpers.Crypto.Hash(System.Byte[],System.String)"></member>
+    <member name="M:System.Web.Helpers.Crypto.Hash(System.String,System.String)"></member>
+    <member name="M:System.Web.Helpers.Crypto.HashPassword(System.String)"></member>
+    <member name="M:System.Web.Helpers.Crypto.SHA1(System.String)"></member>
+    <member name="M:System.Web.Helpers.Crypto.SHA256(System.String)"></member>
+    <member name="M:System.Web.Helpers.Crypto.VerifyHashedPassword(System.String,System.String)"></member>
+    <member name="T:System.Web.Helpers.DynamicJsonArray"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonArray.#ctor(System.Object[])"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonArray.GetEnumerator"></member>
+    <member name="P:System.Web.Helpers.DynamicJsonArray.Item(System.Int32)"></member>
+    <member name="P:System.Web.Helpers.DynamicJsonArray.Length"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonArray.op_Implicit(System.Web.Helpers.DynamicJsonArray)~System.Array"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonArray.op_Implicit(System.Web.Helpers.DynamicJsonArray)~System.Object[]"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonArray.System#Collections#Generic#IEnumerable{T}#GetEnumerator"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonArray.TryConvert(System.Dynamic.ConvertBinder,System.Object@)"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonArray.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)"></member>
+    <member name="T:System.Web.Helpers.DynamicJsonObject"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonObject.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonObject.GetDynamicMemberNames"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonObject.TryConvert(System.Dynamic.ConvertBinder,System.Object@)"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonObject.TryGetIndex(System.Dynamic.GetIndexBinder,System.Object[],System.Object@)"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonObject.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonObject.TrySetIndex(System.Dynamic.SetIndexBinder,System.Object[],System.Object)"></member>
+    <member name="M:System.Web.Helpers.DynamicJsonObject.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)"></member>
+    <member name="T:System.Web.Helpers.Json"></member>
+    <member name="M:System.Web.Helpers.Json.Decode``1(System.String)">
+      <typeparam name="T"></typeparam>
+    </member>
+    <member name="M:System.Web.Helpers.Json.Decode(System.String)"></member>
+    <member name="M:System.Web.Helpers.Json.Decode(System.String,System.Type)"></member>
+    <member name="M:System.Web.Helpers.Json.Encode(System.Object)"></member>
+    <member name="M:System.Web.Helpers.Json.Write(System.Object,System.IO.TextWriter)"></member>
+    <member name="T:System.Web.Helpers.ObjectInfo"></member>
+    <member name="M:System.Web.Helpers.ObjectInfo.Print(System.Object,System.Int32,System.Int32)"></member>
+    <member name="T:System.Web.Helpers.ServerInfo">
+      <summary>現在の Web ページをホストする Web サーバー環境についての情報を表示します。</summary>
+    </member>
+    <member name="M:System.Web.Helpers.ServerInfo.GetHtml">
+      <summary>Web サーバー環境についての情報を表示します。</summary>
+      <returns>Web サーバーについての情報を含む名前と値のペアの文字列。 </returns>
+    </member>
+    <member name="T:System.Web.Helpers.SortDirection">
+      <summary>項目のリストを並べ替える方向を指定します。</summary>
+    </member>
+    <member name="F:System.Web.Helpers.SortDirection.Ascending">
+      <summary>昇順で並べ替え。 たとえば、A から Z。</summary>
+    </member>
+    <member name="F:System.Web.Helpers.SortDirection.Descending">
+      <summary>降順で並べ替え。 たとえば、Z から A。</summary>
+    </member>
+    <member name="T:System.Web.Helpers.WebCache"></member>
+    <member name="M:System.Web.Helpers.WebCache.Get(System.String)"></member>
+    <member name="M:System.Web.Helpers.WebCache.Remove(System.String)"></member>
+    <member name="M:System.Web.Helpers.WebCache.Set(System.String,System.Object,System.Int32,System.Boolean)"></member>
+    <member name="T:System.Web.Helpers.WebGrid">
+      <summary>データ ソースの項目を表示するテーブルを提供します。</summary>
+    </member>
+    <member name="M:System.Web.Helpers.WebGrid.#ctor(System.Collections.Generic.IEnumerable{System.Object},System.Collections.Generic.IEnumerable{System.String},System.String,System.Int32,System.Boolean,System.Boolean,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+      <summary>
+        <see cref="T:System.Web.Helpers.WebGrid" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="source">データ ソース。</param>
+      <param name="columnNames">データ ソースの列名のコレクション。 既定で自動設定されます。</param>
+      <param name="defaultSort">既定でテーブルを並べ替えるために使用する列名。</param>
+      <param name="rowsPerPage">ページングの表示時に表示される行数。 既定値は 10 です。</param>
+      <param name="canPage">
+        <see cref="T:System.Web.Helpers.WebGrid" /> でページングを表示できる場合は true。それ以外の場合は false。 既定値は、true です。 </param>
+      <param name="canSort">
+        <see cref="T:System.Web.Helpers.WebGrid" /> で列を基準にして並べ替えを行うことができる場合は true。 既定値は、true です。</param>
+      <param name="ajaxUpdateContainerId">部分ページ更新 (Ajax サポート) に使用される <see cref="T:System.Web.Helpers.WebGrid" /> に格納されている HTML 要素の ID。</param>
+      <param name="ajaxUpdateCallback">(<see cref="P:System.Web.Helpers.WebGrid.AjaxUpdateContainerId" />) によって指定されている HTML 要素が更新された後に呼び出される関数。</param>
+      <param name="fieldNamePrefix">複数のグリッドをサポートするためのクエリ文字列フィールドのプレフィックス。</param>
+      <param name="pageFieldName">ページ番号のクエリ文字列フィールド名。</param>
+      <param name="selectionFieldName">選択された行番号のクエリ文字列フィールド名。</param>
+      <param name="sortFieldName">並べ替え列のクエリ文字列フィールド名。</param>
+      <param name="sortDirectionFieldName">並べ替え方向のクエリ文字列フィールド名。</param>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.AjaxUpdateCallback">
+      <summary>
+        <see cref="P:System.Web.Helpers.WebGrid.AjaxUpdateCallback" /> によって指定されている HTML 要素が更新された後に呼び出される関数の名前を取得します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.AjaxUpdateContainerId">
+      <summary>部分ページ更新 (Ajax サポート) に使用される <see cref="T:System.Web.Helpers.WebGrid" /> に格納されている HTML 要素の ID を取得します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+    </member>
+    <member name="M:System.Web.Helpers.WebGrid.Bind(System.Collections.Generic.IEnumerable{System.Object},System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Int32)"></member>
+    <member name="M:System.Web.Helpers.WebGrid.Column(System.String,System.String,System.Func`2,System.Boolean,System.Object)">
+      <summary>列オブジェクトを <see cref="T:System.Web.Helpers.WebGrid" /> オブジェクトに追加します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.WebGridColumn" /> を返します。</returns>
+      <param name="columnName">列の名前。</param>
+      <param name="header">列のヘッダー。</param>
+      <param name="format">列の書式を指定する文字列。</param>
+      <param name="style">列のスタイルを指定する文字列。</param>
+      <param name="canSort">列を並べ替えることができる場合は true。それ以外の場合は false。 既定値は、true です。</param>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.ColumnNames">
+      <summary>データ ソースから取得される列名のコレクションを取得します。</summary>
+      <returns>
+        <see cref="T:System.Collections.Generic.IEnumerable`1" /> を返します。</returns>
+    </member>
+    <member name="M:System.Web.Helpers.WebGrid.Columns(System.Web.Helpers.WebGridColumn[])">
+      <summary>列オブジェクトのコレクションを <see cref="T:System.Web.Helpers.WebGrid" /> オブジェクトに追加します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.WebGridColumn" /> を返します。</returns>
+      <param name="columnSet">
+        <see cref="T:System.Web.Helpers.WebGrid" /> の列を表す <see cref="M:System.Web.Helpers.WebGrid.Columns(System.Web.Helpers.WebGridColumn[])" /> オブジェクト。</param>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.FieldNamePrefix">
+      <summary>クエリ文字列フィールドのプレフィックスを取得します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+    </member>
+    <member name="M:System.Web.Helpers.WebGrid.GetContainerUpdateScript(System.String)">
+      <summary>指定されたパスを基に <see cref="T:System.Web.Helpers.WebGrid" /> を更新します。</summary>
+      <returns>
+        <see cref="T:System.Web.IHtmlString" /> を返します。</returns>
+    </member>
+    <member name="M:System.Web.Helpers.WebGrid.GetHtml(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.String,System.Collections.Generic.IEnumerable{System.Web.Helpers.WebGridColumn},System.Collections.Generic.IEnumerable{System.String},System.Web.Helpers.WebGridPagerModes,System.String,System.String,System.String,System.String,System.Int32,System.Object)">
+      <summary>
+        <see cref="T:System.Web.Helpers.WebGrid" /> の表示に使用される HTML を提供します。</summary>
+      <returns>
+        <see cref="T:System.Web.IHtmlString" /> を返します。</returns>
+      <param name="tableStyle">テーブルのスタイルを設定するための CSS クラス。</param>
+      <param name="headerStyle">テーブルのヘッダー行のスタイルを設定するための CSS クラス。</param>
+      <param name="footerStyle">テーブルのフッター行のスタイルを設定するための CSS クラス。</param>
+      <param name="rowStyle">テーブルの各行のスタイルを設定するための CSS クラス。</param>
+      <param name="alternatingRowStyle">テーブルの偶数行のスタイルを設定するための CSS クラス。</param>
+      <param name="selectedRowStyle">テーブルの選択行のスタイルを設定するための CSS クラス。</param>
+      <param name="caption">テーブルのキャプション。</param>
+      <param name="displayHeader">テーブルのヘッダーが表示される場合は true。それ以外の場合は false。 既定値は、true です。</param>
+      <param name="fillEmptyRows">テーブルで <see cref="P:System.Web.Helpers.WebGrid.RowsPerPage" /> の行数を維持するために空行を追加できる場合は true。それ以外の場合は false。 既定値は、false です。</param>
+      <param name="emptyRowCellValue">空行を設定するために使用するテキスト。 この値を表示するには、fillEmptyRows パラメーターを true に設定する必要があります。</param>
+      <param name="columns">列の描画をカスタマイズするための列モデル。</param>
+      <param name="exclusions">列の自動設定時に除外する列。</param>
+      <param name="mode">ページング サポートの描画用のモード。</param>
+      <param name="firstText">結果の最初のページへのリンク テキスト。</param>
+      <param name="previousText">結果の前のページへのリンク テキスト。</param>
+      <param name="nextText">結果の次のページへのリンク テキスト。</param>
+      <param name="lastText">結果の最後のページへのリンク テキスト。</param>
+      <param name="numericLinksCount">表示される数値リンクの数。</param>
+      <param name="htmlAttributes">この要素に設定する HTML 属性を格納するオブジェクト。</param>
+    </member>
+    <member name="M:System.Web.Helpers.WebGrid.GetPageUrl(System.Int32)">
+      <summary>ページ インデックスに基づいて <see cref="T:System.Web.Helpers.WebGrid" /> が表示するページの URL を提供します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+      <param name="pageIndex">表示するページを表す値。</param>
+    </member>
+    <member name="M:System.Web.Helpers.WebGrid.GetSortUrl(System.String)">
+      <summary>列名に基づいて <see cref="T:System.Web.Helpers.WebGrid" /> に含まれるデータの並べ替えに使用する URL を提供します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+      <param name="column">並べ替える列。</param>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.HasSelection">
+      <summary>
+        <see cref="T:System.Web.Helpers.WebGrid" /> の行が選択されているかどうかを決定する値を取得します。</summary>
+      <returns>
+        <see cref="T:System.Boolean" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.PageCount">
+      <summary>
+        <see cref="T:System.Web.Helpers.WebGrid" /> によってできるページ数を取得します。</summary>
+      <returns>
+        <see cref="T:System.Int32" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.PageFieldName">
+      <summary>ページに表示する列の名前を取得します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.PageIndex">
+      <summary>ページャーのインデックスを取得または設定します。</summary>
+      <returns>
+        <see cref="T:System.Int32" /> を返します。</returns>
+    </member>
+    <member name="M:System.Web.Helpers.WebGrid.Pager(System.Web.Helpers.WebGridPagerModes,System.String,System.String,System.String,System.String,System.Int32)">
+      <summary>ページング サポートを提供するために必要な HTML を提供します。</summary>
+      <returns>
+        <see cref="T:System.Web.WebPages.HelperResult" /> を返します。</returns>
+      <param name="mode">ページング サポートの描画用のモード。</param>
+      <param name="firstText">最初のページへのリンク テキスト。</param>
+      <param name="previousText">前のページへのリンク テキスト。</param>
+      <param name="nextText">次のページへのリンク テキスト。</param>
+      <param name="lastText">最後のページへのリンク テキスト。</param>
+      <param name="numericLinksCount">表示される数値リンクの数。</param>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.Rows">
+      <summary>
+        <see cref="T:System.Web.Helpers.WebGrid" /> に格納されている行の一覧を取得します。</summary>
+      <returns>
+        <see cref="T:System.Collections.Generic.IList`1" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.RowsPerPage">
+      <summary>各ページに表示する行数を取得します。</summary>
+      <returns>
+        <see cref="T:System.Int32" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.SelectedIndex">
+      <summary>選択された行のインデックスを取得または設定します。</summary>
+      <returns>
+        <see cref="T:System.Int32" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.SelectedRow">
+      <summary>
+        <see cref="T:System.Web.Helpers.WebGrid" /> の選択された行を取得します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.WebGridRow" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.SelectionFieldName">
+      <summary>選択された列の名前を取得します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.SortColumn">
+      <summary>
+        <see cref="T:System.Web.Helpers.WebGrid" /> の並べ替えに使用される列名を取得または設定します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.SortDirection">
+      <summary>
+        <see cref="T:System.Web.Helpers.WebGrid" /> が並べ替えられる方向を取得または設定します。</summary>
+      <returns>
+        <see cref="T:System.Web.Helpers.SortDirection" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.SortDirectionFieldName">
+      <summary>列のプレフィックスを表す文字列と、方向を基にした現在の並べ替え対象の列の名前を取得します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.SortFieldName">
+      <summary>列のプレフィックスを表す文字列と、現在の並べ替え対象の列の名前を取得します。</summary>
+      <returns>
+        <see cref="T:System.String" /> を返します。</returns>
+    </member>
+    <member name="M:System.Web.Helpers.WebGrid.Table(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.String,System.Collections.Generic.IEnumerable{System.Web.Helpers.WebGridColumn},System.Collections.Generic.IEnumerable{System.String},System.Func`2,System.Boolean)">
+      <summary>ページングをサポートするテーブルの HTML を提供します。</summary>
+      <returns>
+        <see cref="T:System.Web.IHtmlString" /> を返します。</returns>
+      <param name="tableStyle">テーブル クラス。</param>
+      <param name="headerStyle">ヘッダー行クラス。</param>
+      <param name="footerStyle">フッター行クラス。</param>
+      <param name="rowStyle">奇数行の行クラス。</param>
+      <param name="alternatingRowStyle">偶数行の行クラス。</param>
+      <param name="selectedRowStyle">選択行のスタイルを設定するための CSS クラス。</param>
+      <param name="caption">
+        <see cref="T:System.Web.Helpers.WebGrid" /> のテーブルのキャプションとして表示されるテキスト。</param>
+      <param name="displayHeader">
+        <see cref="T:System.Web.Helpers.WebGrid" /> のテーブル内でヘッダー行を表示するかどうかを決定する値。</param>
+      <param name="fillEmptyRows">
+        <see cref="P:System.Web.Helpers.WebGrid.RowsPerPage" /> の行数を確保するために、テーブルで空行を追加できるかどうかを決定する値。</param>
+      <param name="emptyRowCellValue">空行を設定するために使用するテキスト。</param>
+      <param name="columns">列の描画をカスタマイズするための列モデル。</param>
+      <param name="exclusions">列の自動設定時に除外する列。</param>
+      <param name="footer">テーブル フッター テンプレート。</param>
+      <param name="htmlAttributes">この要素に設定する HTML 属性を格納するオブジェクト。</param>
+    </member>
+    <member name="P:System.Web.Helpers.WebGrid.TotalRowCount">
+      <summary>
+        <see cref="T:System.Web.Helpers.WebGrid" /> の行の総数を取得します。</summary>
+      <returns>
+        <see cref="T:System.Int32" /> を返します。</returns>
+    </member>
+    <member name="T:System.Web.Helpers.WebGridColumn"></member>
+    <member name="M:System.Web.Helpers.WebGridColumn.#ctor"></member>
+    <member name="P:System.Web.Helpers.WebGridColumn.CanSort"></member>
+    <member name="P:System.Web.Helpers.WebGridColumn.ColumnName"></member>
+    <member name="P:System.Web.Helpers.WebGridColumn.Format"></member>
+    <member name="P:System.Web.Helpers.WebGridColumn.Header"></member>
+    <member name="P:System.Web.Helpers.WebGridColumn.Style"></member>
+    <member name="T:System.Web.Helpers.WebGridPagerModes"></member>
+    <member name="F:System.Web.Helpers.WebGridPagerModes.Numeric">
+      <summary />
+    </member>
+    <member name="F:System.Web.Helpers.WebGridPagerModes.NextPrevious">
+      <summary />
+    </member>
+    <member name="F:System.Web.Helpers.WebGridPagerModes.FirstLast">
+      <summary />
+    </member>
+    <member name="F:System.Web.Helpers.WebGridPagerModes.All">
+      <summary />
+    </member>
+    <member name="T:System.Web.Helpers.WebGridRow"></member>
+    <member name="M:System.Web.Helpers.WebGridRow.GetEnumerator"></member>
+    <member name="M:System.Web.Helpers.WebGridRow.GetSelectLink(System.String)"></member>
+    <member name="M:System.Web.Helpers.WebGridRow.GetSelectUrl"></member>
+    <member name="P:System.Web.Helpers.WebGridRow.Item(System.Int32)"></member>
+    <member name="P:System.Web.Helpers.WebGridRow.Item(System.String)"></member>
+    <member name="M:System.Web.Helpers.WebGridRow.System#Collections#IEnumerable#GetEnumerator"></member>
+    <member name="M:System.Web.Helpers.WebGridRow.ToString"></member>
+    <member name="M:System.Web.Helpers.WebGridRow.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)"></member>
+    <member name="P:System.Web.Helpers.WebGridRow.Value"></member>
+    <member name="P:System.Web.Helpers.WebGridRow.WebGrid"></member>
+    <member name="T:System.Web.Helpers.WebImage"></member>
+    <member name="M:System.Web.Helpers.WebImage.#ctor(System.Byte[])"></member>
+    <member name="M:System.Web.Helpers.WebImage.#ctor(System.IO.Stream)"></member>
+    <member name="M:System.Web.Helpers.WebImage.#ctor(System.String)"></member>
+    <member name="M:System.Web.Helpers.WebImage.AddImageWatermark(System.String,System.Int32,System.Int32,System.String,System.String,System.Int32,System.Int32)"></member>
+    <member name="M:System.Web.Helpers.WebImage.AddImageWatermark(System.Web.Helpers.WebImage,System.Int32,System.Int32,System.String,System.String,System.Int32,System.Int32)"></member>
+    <member name="M:System.Web.Helpers.WebImage.AddTextWatermark(System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Int32,System.Int32)"></member>
+    <member name="M:System.Web.Helpers.WebImage.Clone"></member>
+    <member name="M:System.Web.Helpers.WebImage.Crop(System.Int32,System.Int32,System.Int32,System.Int32)"></member>
+    <member name="P:System.Web.Helpers.WebImage.FileName"></member>
+    <member name="M:System.Web.Helpers.WebImage.FlipHorizontal"></member>
+    <member name="M:System.Web.Helpers.WebImage.FlipVertical"></member>
+    <member name="M:System.Web.Helpers.WebImage.GetBytes(System.String)"></member>
+    <member name="M:System.Web.Helpers.WebImage.GetImageFromRequest(System.String)"></member>
+    <member name="P:System.Web.Helpers.WebImage.Height"></member>
+    <member name="P:System.Web.Helpers.WebImage.ImageFormat"></member>
+    <member name="M:System.Web.Helpers.WebImage.Resize(System.Int32,System.Int32,System.Boolean,System.Boolean)"></member>
+    <member name="M:System.Web.Helpers.WebImage.RotateLeft"></member>
+    <member name="M:System.Web.Helpers.WebImage.RotateRight"></member>
+    <member name="M:System.Web.Helpers.WebImage.Save(System.String,System.String,System.Boolean)"></member>
+    <member name="P:System.Web.Helpers.WebImage.Width"></member>
+    <member name="M:System.Web.Helpers.WebImage.Write(System.String)"></member>
+    <member name="T:System.Web.Helpers.WebMail">
+      <summary>電子メールを作成および SMTP (Simple Mail Transfer Protocol) を使用して送信する方法を提供します。</summary>
+    </member>
+    <member name="P:System.Web.Helpers.WebMail.EnableSsl">
+      <summary>電子メールの送信時に接続の暗号化に SSL (Secure Sockets Layer) が使用されるかどうかを取得または設定します。</summary>
+      <returns>接続の暗号化に SSL を使用する場合は true。それ以外の場合は false。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebMail.From">
+      <summary>送信者の電子メール アドレスを取得または設定します。</summary>
+      <returns>送信者の電子メール アドレス。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebMail.Password">
+      <summary>使用される電子メール アカウントを基に、送信者のパスワードを取得または設定します。</summary>
+      <returns>送信者ののパスワード。</returns>
+    </member>
+    <member name="M:System.Web.Helpers.WebMail.Send(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Collections.Generic.IEnumerable{System.String})">
+      <summary>指定したメッセージを、配信用 SMTP サーバーに送信します。</summary>
+      <param name="to">この電子メール メッセージの受信者。 複数の受信者を指定する場合は、受信者をセミコロン (;) で区切ります。</param>
+      <param name="subject">電子メール メッセージの件名。</param>
+      <param name="body">電子メール メッセージの本文。 <paramref name="isBodyHtml" /> が true である場合、本文内の HTML をマークアップとして解釈します。</param>
+      <param name="from">メッセージ送信者の電子メール アドレス。</param>
+      <param name="cc">必要な場合は、電子メール メッセージのカーボン コピー (CC: carbon copy)。</param>
+      <param name="filesToAttach">電子メール メッセージに添付するファイルを指定するファイル名のコレクション。</param>
+      <param name="isBodyHtml">電子メール メッセージの本文が HTML 形式であることを指定する場合は true。プレーンテキスト形式であることを示す場合は false。</param>
+      <param name="additionalHeaders">この電子メール メッセージと共に送信されるヘッダー コレクション。</param>
+    </member>
+    <member name="P:System.Web.Helpers.WebMail.SmtpPort">
+      <summary>SMTP トランザクションで使用されるポートを取得または設定します。</summary>
+      <returns>SMTP トランザクションで使用されるポート。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebMail.SmtpServer">
+      <summary>電子メール メッセージの送信に使用される SMTP サーバーを取得または設定します。</summary>
+      <returns>SMTP サーバー。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebMail.SmtpUseDefaultCredentials">
+      <summary>既定の資格情報が要求と共に送信されるかどうかを示す値を取得または設定します。</summary>
+      <returns>資格情報が電子メール メッセージと共に送信される場合は true。それ以外の場合は false。</returns>
+    </member>
+    <member name="P:System.Web.Helpers.WebMail.UserName">
+      <summary>ユーザーの名前を取得または設定します。</summary>
+      <returns>ユーザーの名前。</returns>
+    </member>
+  </members>
+</doc>

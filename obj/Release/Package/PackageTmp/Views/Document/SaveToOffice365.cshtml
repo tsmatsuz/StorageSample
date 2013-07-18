@@ -1,0 +1,162 @@
+﻿@model WordSampleWebRole.Models.O365SaveInfoModel
+
+@{
+    ViewBag.Title = "SaveToOffice365";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    var siteurl = null;
+    var userid = null;
+    var password = null;
+
+    $(document).ready(function () {
+        $('.authinput').blur(function () {
+            if (($('#SiteUrl').val().length > 0) && ($('#UserId').val().length > 0) && ($('#Password').val().length > 0))
+                if (($('#SiteUrl').val() != siteurl) || ($('#UserId').val() != userid) || ($('#Password').val() != password)) {
+                    siteurl = $('#SiteUrl').val();
+                    userid = $('#UserId').val();
+                    password = $('#Password').val();
+                    $('#wait_dialog').dialog('open');
+                    $.ajax({
+                        type: 'POST',
+                        cache: false,
+                        url: '/Document/SPOAvailableLists',
+                        data: {
+                            url: siteurl,
+                            userid: userid,
+                            password: password
+                        },
+                        success: function (result) {
+                            $('#wait_dialog').dialog('close');
+                            $("#DocLibName option").remove();
+                            for (var i = 0; i < result.length; i++) {
+                                $('#DocLibName').append($('<option>').attr({ value: result[i] }).text(result[i]));
+                            }
+                            $('#SiteUrl').attr('readonly', true);
+                            $('#UserId').attr('readonly', true);
+                            $('#Password').attr('readonly', true);
+                            $('#SubButton').attr('disabled', '');
+                            $('#ClrButton').attr('disabled', '');
+                        },
+                        error: function (request, status, error) {
+                            $('#wait_dialog').dialog('close');
+                            $('#message1').text(request.responseText);
+                        }
+                    });
+                }
+        });
+
+        $('#ClrButton').click(function () {
+            $.ajax({
+                type: 'GET',
+                cache: false,
+                url: '/Document/ClearLogin',
+                success: function (result) {
+                    $('#SiteUrl').attr('readonly', false);
+                    $('#UserId').attr('readonly', false);
+                    $('#Password').attr('readonly', false);
+                    $('#SubButton').attr('disabled', 'disabled');
+                    $('#ClrButton').attr('disabled', 'disabled');
+                    $("#DocLibName option").remove();
+                    $('#message1').text('');
+                },
+                error: function (request, status, error) {
+                    $('#wait_dialog').dialog('close');
+                    $("#DocLibName option").remove();
+                    $('#message1').text('status:' + status + ';' + request.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+<div id="navtab">
+<ul>
+    <li><a href="#tab-content"><span>SharePoint Online (Office 365)</span></a></li>
+    <li><a href="/Document/SaveToSkydrive"><span>SkyDrive</span></a></li>
+    <li><a href="/Document/SaveToBlobstorage"><span>Windows Azure</span></a></li>
+</ul>
+
+<div id="tab-content">
+
+<div style="text-align:right;">
+<a href="http://www.microsoft.com/ja-jp/office365/free-office365-trial.aspx?WT.mc_id=ODC_jaJP_O365Try_OfficeHome_Hero">Office 365 30 日間試用版</a><br />
+</div>
+
+<h2>請求書の保存 - SharePoint Online (Office 365)</h2>
+
+@using (Html.BeginForm("SaveToOffice365", "Document", FormMethod.Post, new { id = "inputForm" }))
+{
+    <p>
+    1. Office 365 のサイトコレクション URL, ユーザー ID, パスワードを入力してください。
+    </p>
+
+    <table border="1">
+    <tr>
+        <td>サイト URL</td>
+        <td>@Html.TextBoxFor(m => m.SiteUrl, new { @class = "authinput", style = "width:300px", title = @"例: https://sample.sharepoint.com" })</td>
+    </tr>
+    <tr>
+        <td>ユーザーID</td>
+        <td>@Html.TextBoxFor(m => m.UserId, new { @class = "authinput", style = "width:300px" })</td>
+    </tr>
+    <tr>
+        <td>パスワード</td>
+        <td>@Html.PasswordFor(m => m.Password, new { @class = "authinput", style = "width:300px" })</td>
+    </tr>
+    </table>
+    
+    <div id="message1" style="color:Red;"></div>
+
+    <p>
+    2. 保存先のリスト (ドキュメント ライブラリー) を選択してください。
+    </p>
+    
+    <table border="1">
+    <tr>
+        <td>保存先のリスト</td>
+        <td>@Html.DropDownListFor(m => m.DocLibName, new List<SelectListItem>())</td>
+    </tr>
+    </table>
+    
+    <p>
+    3. [Save] ボタンを押してください。<br />
+    (ファイルは、PO_[japanese local time].docx の名前で保存されます。)
+    </p>
+    
+    <p>
+    <input id="SubButton" type="submit" value="Save" disabled="disabled" />
+    <input id="ClrButton" type="button" value="Clear login" disabled="disabled" />
+    </p>
+}
+
+<div id="wait_dialog" title="しばらく、お待ちください">
+  <img src="../../Content/ppsd-throbber.gif" alt="Please wait ..." />
+  <span id="waitmessage">接続しています ...</span>
+</div>
+
+<script type="text/javascript">
+    $('#inputForm').inputHintOverlay(5, 3);
+
+    $('#wait_dialog').dialog({
+        autoOpen: false,
+        modal: true,
+        width: 600
+    });
+
+    $('#navtab').tabs({
+        select: function (event, ui) {
+            var url = $.data(ui.tab, "load.tabs");
+            if (url) {
+                location.href = url;
+                return false;
+            }
+            return true;
+        },
+        selected: 0
+    });
+</script>
+
+</div>
+</div>

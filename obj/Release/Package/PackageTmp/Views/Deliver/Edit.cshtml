@@ -1,0 +1,112 @@
+﻿@model WordSampleWebRole.Models.DeliverInfoModel
+
+@{
+    ViewBag.Title = "配送先の入力";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ja-JP");
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Confirm", "Deliver", FormMethod.Post, new { id = "editForm" }))
+{
+    <p>
+    請求先の情報を入力してください
+    <input type="submit" value="次へ進む" />
+    </p>
+    
+    <table style="width: 100%;">
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.Name)
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.Name, new { title = "例: 舞黒 太郎" })
+                @Html.ValidationMessageFor(m => m.Name)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.ZipCode)
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.ZipCode, new { style = "ime-mode: disabled;", title = "例: 108-0075" })
+                @Html.ValidationMessageFor(m => m.ZipCode)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.Address)
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.Address, new { title = "例: 東京都港区港南2-16-3" })
+                @Html.ValidationMessageFor(m => m.Address)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.Telephone)
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.Telephone, new { style = "ime-mode: disabled;", title = "例: 03-4332-5300" })
+                @Html.ValidationMessageFor(m => m.Telephone)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.EmailAddress)
+            </th>
+            <td>
+                @Html.TextBoxFor(m => m.EmailAddress, new { style = "ime-mode: disabled;", title = "例: demo@microsoft.com" })
+                @Html.ValidationMessageFor(m => m.EmailAddress)
+            </td>
+        </tr>
+    </table>
+    
+    <p>購入商品一覧</p>
+    
+    <table style="width: 100%;">
+        <tr>
+            <th>
+                商品
+            </th>
+            <th>
+                単価
+            </th>
+            <th>
+                数量
+            </th>
+            <th>
+                小計
+            </th>
+            <th>
+                &nbsp;
+            </th>
+        </tr>
+        @foreach (var item in WordSampleWebRole.Helper.GetCurrentProductList(Session))
+        {
+            <tr>
+                <td>
+                    @item.ProductName
+                </td>
+                <td>
+                    @String.Format("{0:c}", item.ProductUnitPrice)
+                </td>
+                <td>
+                    @item.ProductCount
+                </td>
+                <td>
+                    @String.Format("{0:c}", item.ProductUnitPrice * item.ProductCount)
+                </td>
+                <td>
+                    @Html.ActionLink("数量変更", "Confirm", "Product", new { id = item.ProductId }, null)
+                    @Html.ActionLink("削除", "Delete", "Product", new { id = item.ProductId }, null)
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<script type="text/javascript">
+    $('#editForm').inputHintOverlay(5, 3);
+</script>

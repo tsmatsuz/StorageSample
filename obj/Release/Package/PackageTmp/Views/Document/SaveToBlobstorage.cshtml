@@ -1,0 +1,143 @@
+﻿@model WordSampleWebRole.Models.BlobSaveInfoModel
+
+@{
+    ViewBag.Title = "SaveToBlobstorage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    var account = null;
+    var accesskey = null;
+
+    $(document).ready(function () {
+        $('.authinput').blur(function () {
+            if (($('#Account').val().length > 0) && ($('#AccessKey').val().length > 0))
+                if (($('#Account').val() != account) || ($('#AccessKey').val() != accesskey)) {
+                    account = $('#Account').val();
+                    accesskey = $('#AccessKey').val();
+                    $('#wait_dialog').dialog('open');
+                    $.ajax({
+                        type: 'POST',
+                        cache: false,
+                        url: '/Document/BlobContainers',
+                        data: {
+                            account: account,
+                            accesskey: accesskey
+                        },
+                        success: function (result) {
+                            $('#wait_dialog').dialog('close');
+                            $("#Container option").remove();
+                            for (var i = 0; i < result.length; i++) {
+                                $('#Container').append($('<option>').attr({ value: result[i] }).text(result[i]));
+                            }
+                            $('#message1').text('');
+                        },
+                        error: function (request, status, error) {
+                            $('#wait_dialog').dialog('close');
+                            $("#Container option").remove();
+                            $('#message1').text('status:' + status + ';' + request.responseText);
+                        }
+                    });
+                }
+        });
+    });
+</script>
+
+<div id="navtab">
+<ul>
+    <li><a href="/Document/SaveToOffice365"><span>SharePoint Online (Office 365)</span></a></li>
+    <li><a href="/Document/SaveToSkydrive"><span>SkyDrive</span></a></li>
+    <li><a href="#tab-content"><span>Windows Azure</span></a></li>
+</ul>
+
+<div id="tab-content">
+
+<div style="text-align:right;">
+<a href="http://windowsazurepass.com/?Campid=2C521249-3180-E011-A887-001F29C6FB82">Windows Azure 30 日間 無料パス (評価用)</a><br />
+<a href="http://storageexplorer.cloudapp.net">Azure Storage Explorer (Web)</a>&nbsp;で確認<br />
+</div>
+
+<h2>請求書の保存 - Blob Storage (Windows Azure)</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+    1. Storage Account の名前とアクセス キーを入力してください。
+    (<a href="https://windows.azure.com/default.aspx">Windows Azure Management Portal</a>&nbsp;で確認してください)
+    </p>
+
+    <table border="1">
+    <tr>
+        <td>Account</td>
+        <td>
+        @Html.TextBoxFor(m => m.Account, new { @class = "authinput", style = "width:300px" })
+        @Html.ValidationMessageFor(m => m.Account)
+        </td>
+    </tr>
+    <tr>
+        <td>Access Key</td>
+        <td>
+        @Html.PasswordFor(m => m.AccessKey, new { @class = "authinput", style = "width:300px" })
+        @Html.ValidationMessageFor(m => m.AccessKey)
+        </td>
+    </tr>
+    </table>
+    
+    <div id="message1" style="color:Red;"></div>
+
+    <p>
+    2. 保存先のコンテナを選択してください。
+    (コンテナは、<a href="http://storageexplorer.cloudapp.net">Azure Storage Explorer (Web)</a>&nbsp;で作成できます。)
+    </p>
+    
+    <table border="1">
+    <tr>
+        <td>Container</td>
+        <td>
+        @Html.DropDownListFor(m => m.Container, new List<SelectListItem>())
+        @Html.ValidationMessageFor(m => m.Container)
+        </td>
+    </tr>
+    </table>
+    
+    <p>
+    3. [Save] ボタンを押してください。<br />
+    (ファイルは、PO_[japanese local time].docx の名前で保存されます。)
+    </p>
+
+    <p>
+    <input id="SubButton" type="submit" value="Save" />
+    </p>
+}
+
+<div id="wait_dialog" title="しばらく、お待ちください">
+  <img src="../../Content/ppsd-throbber.gif" alt="Please wait ..." />
+  <span id="waitmessage">接続しています ...</span>
+</div>
+
+<script type="text/javascript">
+    $('#wait_dialog').dialog({
+        autoOpen: false,
+        modal: true,
+        width: 600
+    });
+
+    $('#navtab').tabs({
+        select: function (event, ui) {
+            var url = $.data(ui.tab, "load.tabs");
+            if (url) {
+                location.href = url;
+                return false;
+            }
+            return true;
+        },
+        selected: 2
+    });
+
+    $.ajaxSetup({
+        timeout: 600000 // it needs too much time when occuring Azure Storage exception
+    });
+</script>
+
+</div>
+</div>

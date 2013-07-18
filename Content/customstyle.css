@@ -1,0 +1,26 @@
+﻿a.linkbutton
+{
+  display: block;
+  width: 180px;
+  color: #ffffff;
+  background-color: #66aa66;
+  border: outset 2px #9999cc;
+  margin: 5px;
+  padding: 3px 1px 1px 0px;
+  font-size: 12px;
+  line-height: 12px;
+  text-align: center;
+  text-decoration: none;
+}
+
+a.linkbutton:hover {
+  color: #eeeeee;
+  background-color: #559955;
+  border: inset 2px #9999cc;
+  margin: 5px;
+  padding: 4px 0px 0px 1px;
+}
+
+a.linkbutton:active { color: #ffffff; }
+
+a.linkbutton:visited { color: #ffffff; }

@@ -1,0 +1,115 @@
+﻿@model WordSampleWebRole.Models.DeliverInfoModel
+
+@{
+    ViewBag.Title = "注文内容の確認";
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("ja-JP");
+}
+
+<h2>注文内容の確認</h2>
+
+@using (Html.BeginForm("Confirm", "Deliver"))
+{
+    <p>
+    この内容で注文を確定します。
+    @Html.ActionLink("請求書を表示", "Display", "Document", null, new { @class = "linkbutton" })
+    @Html.ActionLink("クラウド ストレージへ保存", "SaveToOffice365", "Document", null, new { @class = "linkbutton" })
+    </p>
+
+    @Html.HiddenFor(m => m.Name)
+    @Html.HiddenFor(m => m.Address)
+    @Html.HiddenFor(m => m.ZipCode)
+    @Html.HiddenFor(m => m.Telephone)
+    @Html.HiddenFor(m => m.EmailAddress)
+        
+    <table style="width: 100%;">
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.Name)
+            </th>
+            <td>
+                @Html.DisplayFor(m => m.Name)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.ZipCode)
+            </th>
+            <td>
+                @Html.DisplayFor(m => m.ZipCode)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.Address)
+            </th>
+            <td>
+                @Html.DisplayFor(m => m.Address)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.Telephone)
+            </th>
+            <td>
+                @Html.DisplayFor(m => m.Telephone)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.LabelFor(m => m.EmailAddress)
+            </th>
+            <td>
+                @Html.DisplayFor(m => m.EmailAddress)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                合計金額
+            </th>
+            <td>
+                @String.Format("{0:c}", ViewBag.CostAmount)
+            </td>
+        </tr>
+    </table>
+    
+    <p>購入商品一覧</p>
+    
+    <table style="width: 100%;">
+        <tr>
+            <th>
+                商品
+            </th>
+            <th>
+                単価
+            </th>
+            <th>
+                数量
+            </th>
+            <th>
+                小計
+            </th>
+        </tr>
+        @foreach (var item in WordSampleWebRole.Helper.GetCurrentProductList(Session))
+        {
+            <tr>
+                <td>
+                    @item.ProductName
+                    @Html.Hidden("ProductName", item.ProductName)
+                </td>
+                <td>
+                    @String.Format("{0:c}", item.ProductUnitPrice)
+                    @Html.Hidden("ProductUnitPrice", item.ProductUnitPrice)
+                </td>
+                <td>
+                    @item.ProductCount
+                    @Html.Hidden("ProductCount", item.ProductCount)
+                </td>
+                <td>
+                    @String.Format("{0:c}", item.ProductUnitPrice * item.ProductCount)
+                    @Html.Hidden("ProductId", item.ProductId)
+                </td>
+            </tr>
+        }
+    </table>
+}

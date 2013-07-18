@@ -1,0 +1,54 @@
+﻿@model WordSampleWebRole.Models.SkydriveSaveInfoModel
+
+@{
+    ViewBag.Title = "SaveToSkydrive";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="navtab">
+<ul>
+    <li><a href="/Document/SaveToOffice365"><span>SharePoint Online (Office 365)</span></a></li>
+    <li><a href="#tab-content"><span>SkyDrive</span></a></li>
+    <li><a href="/Document/SaveToBlobstorage"><span>Windows Azure</span></a></li>
+</ul>
+
+<div id="tab-content">
+
+<div style="text-align:right;">
+<a href="https://skydrive.live.com/">SkyDrive を今すぐ使う !</a><br />
+</div>
+
+<h2>請求書の保存 - SkyDrive (Windows Live)</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+    保存先のフォルダーを選択してください。(ファイルは、PO_[japanese local time].docx の名前で保存されます。)&nbsp;
+    <input type="submit" value="保存実行" />
+    </p>
+    <table border="1">
+    <tr>
+        <td>保存先のフォルダー</td>
+        <td>@Html.DropDownListFor(m => m.FolderLocation, (List<SelectListItem>) ViewBag.Folders)</td>
+    </tr>
+    </table>
+    
+    @Html.HiddenFor(m => m.AccessToken)
+}
+
+<script type="text/javascript">
+    $('#navtab').tabs({
+        select: function (event, ui) {
+            var url = $.data(ui.tab, "load.tabs");
+            if (url) {
+                location.href = url;
+                return false;
+            }
+            return true;
+        },
+        selected: 1
+    });
+</script>
+
+</div>
+</div>
