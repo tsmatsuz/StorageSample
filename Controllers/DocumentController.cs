@@ -87,7 +87,7 @@ namespace WordSampleWebRole.Controllers
         {
             // if you retrieve refresh token too, please add wl.offline_access to scope !
             if (string.IsNullOrEmpty(code))
-                return Redirect(@"https://oauth.live.com/authorize?client_id=" + HttpUtility.UrlEncode(SkyDriveUtil.CLIENT_ID) + "&scope=wl.signin%20wl.skydrive_update&response_type=code&redirect_uri=" + HttpUtility.UrlEncode(SkyDriveUtil.REDIRECT_URL));
+                return Redirect(@"https://login.live.com/oauth20_authorize.srf?client_id=" + HttpUtility.UrlEncode(SkyDriveUtil.CLIENT_ID) + "&scope=wl.signin%20wl.skydrive_update&response_type=code&redirect_uri=" + HttpUtility.UrlEncode(SkyDriveUtil.REDIRECT_URL));
 
             OAuthToken token;
             SkyDriveUtil.RequestAccessTokenByVerifier(code, out token);

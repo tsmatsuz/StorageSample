@@ -45,7 +45,7 @@ namespace WordSampleWebRole
         {
             token = null;
 
-            HttpWebRequest webRequest = WebRequest.Create(@"https://oauth.live.com/token") as HttpWebRequest;
+            HttpWebRequest webRequest = WebRequest.Create(@"https://login.live.com/oauth20_token.srf") as HttpWebRequest;
             webRequest.Method = "POST";
             using (StreamWriter writer = new StreamWriter(webRequest.GetRequestStream()))
             {
