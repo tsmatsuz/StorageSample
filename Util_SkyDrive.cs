@@ -15,9 +15,10 @@ namespace WordSampleWebRole
 
     public class SkyDriveUtil
     {
-        public const string CLIENT_ID = "YOUR APPLICATION'S CLIENT ID (Please change here !)";
-        public const string CLIENT_SECRET = "YOUR APPLICATION'S CLIENT SECRET (Please change here !)";
-        public const string REDIRECT_URL = "YOUR APPLICATION'S URL (Please change here !)";
+        public const string CLIENT_ID = "<your app client id>";
+        public const string CLIENT_SECRET = "<your app client secret>";
+        // http://<your published site>/Document/SaveToSkydrive
+        public const string REDIRECT_URL = "<Please input your site url>/Document/SaveToSkydrive";
 
         public static void RequestAccessTokenByVerifier(string verifier, out OAuthToken token)
         {
@@ -47,6 +48,7 @@ namespace WordSampleWebRole
 
             HttpWebRequest webRequest = WebRequest.Create(@"https://login.live.com/oauth20_token.srf") as HttpWebRequest;
             webRequest.Method = "POST";
+            webRequest.ContentType = "application/x-www-form-urlencoded";
             using (StreamWriter writer = new StreamWriter(webRequest.GetRequestStream()))
             {
                 writer.Write(postContent);
