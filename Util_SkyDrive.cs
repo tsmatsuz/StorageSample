@@ -63,28 +63,32 @@ namespace WordSampleWebRole
         public static List<SelectListItem> GetFolders(OAuthToken token)
         {
             List<SelectListItem> result = new List<SelectListItem>();
-            FolderEntryCollection folders;
+            ItemEntryCollection items;
 
-            HttpWebRequest webRequest = HttpWebRequest.Create(@"https://apis.live.net/v5.0/me/skydrive/files?access_token=" + HttpUtility.UrlEncode(token.AccessToken)) as HttpWebRequest;
+            HttpWebRequest webRequest = HttpWebRequest.Create(@"https://api.onedrive.com/v1.0/drive/root/children") as HttpWebRequest;
+            webRequest.Headers.Add(HttpRequestHeader.Authorization, "BEARER " + token.AccessToken);
             webRequest.Method = "GET";
             using (HttpWebResponse webResponse = webRequest.GetResponse() as HttpWebResponse)
             {
                 if (webResponse.StatusCode == HttpStatusCode.OK)
                 {
-                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(FolderEntryCollection));
-                    folders = serializer.ReadObject(webResponse.GetResponseStream()) as FolderEntryCollection;
+                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ItemEntryCollection));
+                    items = serializer.ReadObject(webResponse.GetResponseStream()) as ItemEntryCollection;
                 }
                 else
                     throw new Exception("Failed to get skydrive folders using REST API (Status : " + webResponse.StatusCode + ")");
             }
 
-            foreach (var item in folders.Data)
+            foreach (var item in items.Value)
             {
-                result.Add(new SelectListItem()
+                if (item.Folder != null) // filter only "folder" (erase "file")
                 {
-                    Value = item.UploadLocation,
-                    Text = item.Name
-                });
+                    result.Add(new SelectListItem()
+                    {
+                        Value = string.Format("https://api.onedrive.com/v1.0/drive/items/{0}/children", item.Id),
+                        Text = item.Name
+                    });
+                }
             }
 
             return result;
@@ -92,14 +96,26 @@ namespace WordSampleWebRole
 
         public static void UploadFile(string fileName, Stream readStream, string folderLocation, string accessToken)
         {
-            HttpWebRequest webRequest = HttpWebRequest.Create(VirtualPathUtility.RemoveTrailingSlash(folderLocation) + "?access_token=" + HttpUtility.UrlEncode(accessToken)) as HttpWebRequest;
+            HttpWebRequest webRequest = HttpWebRequest.Create(VirtualPathUtility.RemoveTrailingSlash(folderLocation)) as HttpWebRequest;
             webRequest.Method = "POST";
-            webRequest.ContentType = "multipart/form-data; boundary=A300tsmatsuzdemox";
+            webRequest.ContentType = "multipart/related; boundary=A300tsmatsuzdemox";
+            webRequest.Headers.Add(HttpRequestHeader.Authorization, "BEARER " + accessToken);
             using (Stream webStream = webRequest.GetRequestStream())
             {
                 // 注 : 今回、エンコード (Base64 等) はしない !
                 string startEnvelope = @"--A300tsmatsuzdemox
-Content-Disposition: form-data; name=""file""; filename=""{0}""
+Content-ID: <metadata>
+Content-Type: application/json
+
+{{
+  ""name"": ""{0}"",
+  ""file"": {{}},
+  ""@content.sourceUrl"": ""cid:content"",
+  ""@name.conflictBehavior"": ""rename""
+}}
+
+--A300tsmatsuzdemox
+Content-ID: <content>
 Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
 
 ";
@@ -116,7 +132,6 @@ Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.doc
                 }
 
                 string endEnvelope = @"
-
 --A300tsmatsuzdemox--";
                 byte[] endData = encoding.GetBytes(endEnvelope);
                 webStream.Write(endData, 0, endData.Length);
@@ -185,21 +200,29 @@ Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.doc
          "updated_time": "2008-11-04T05:39:24+0000"
       }
      */
+
     [DataContract]
     public class FolderEntry
+    {
+        [DataMember(Name = "childCount")]
+        public int Id;
+    }
+
+    [DataContract]
+    public class ItemEntry
     {
         [DataMember(Name = "id")]
         public string Id;
         [DataMember(Name = "name")]
         public string Name;
-        [DataMember(Name = "upload_location")]
-        public string UploadLocation;
+        [DataMember(Name = "folder")]
+        public FolderEntry Folder;
     }
 
     [DataContract]
-    public class FolderEntryCollection
+    public class ItemEntryCollection
     {
-        [DataMember(Name = "data")]
-        public FolderEntry[] Data;
+        [DataMember(Name = "value")]
+        public ItemEntry[] Value;
     }
 }

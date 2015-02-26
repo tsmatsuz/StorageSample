@@ -70,3 +70,14 @@ C:\Demo\cloudstoragesample\StorageSample\bin\ja\System.Web.WebPages.Razor.resour
 C:\Demo\cloudstoragesample\StorageSample\obj\Debug\StorageSample.csprojResolveAssemblyReference.cache
 C:\Demo\cloudstoragesample\StorageSample\obj\Debug\WordSampleWebRole.dll
 C:\Demo\cloudstoragesample\StorageSample\obj\Debug\WordSampleWebRole.pdb
+C:\Demo\tmp2\StorageSample\bin\WordSampleWebRole.dll.config
+C:\Demo\tmp2\StorageSample\bin\WordSampleWebRole.dll
+C:\Demo\tmp2\StorageSample\bin\WordSampleWebRole.pdb
+C:\Demo\tmp2\StorageSample\bin\DocumentFormat.OpenXml.dll
+C:\Demo\tmp2\StorageSample\bin\Microsoft.IdentityModel.dll
+C:\Demo\tmp2\StorageSample\bin\Microsoft.Web.Infrastructure.dll
+C:\Demo\tmp2\StorageSample\bin\DocumentFormat.OpenXml.xml
+C:\Demo\tmp2\StorageSample\bin\Microsoft.Web.Infrastructure.xml
+C:\Demo\tmp2\StorageSample\bin\ja\Microsoft.IdentityModel.resources.dll
+C:\Demo\tmp2\StorageSample\obj\Debug\WordSampleWebRole.dll
+C:\Demo\tmp2\StorageSample\obj\Debug\WordSampleWebRole.pdb
